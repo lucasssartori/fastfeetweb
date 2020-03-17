@@ -8,11 +8,18 @@ import history from '~/services/history';
 import Pagination from '~/components/Pagination';
 import NewButton from '~/components/Button';
 
-import { Container, Content, ContentTable, Table, Row } from './styles';
+import {
+  Container,
+  Content,
+  Options,
+  ContentTable,
+  Table,
+  Row,
+} from './styles';
 
 export default function ListDelivery() {
   const [deliverys, setDeliverys] = useState([]);
-  const [delivery = '', setDelivery] = useState();
+  const [product = '', setProduct] = useState();
   const [page = 1, setPage] = useState();
   const [loading = false, setLoading] = useState();
 
@@ -22,12 +29,12 @@ export default function ListDelivery() {
         setLoading(true);
         const response = await api.get('deliveries', {
           params: {
-            delivery,
+            product,
             page,
           },
         });
 
-        setDeliverys(response.data.students);
+        setDeliverys(response.data.deliverys);
         setLoading(false);
       } catch (err) {
         setDeliverys([]);
@@ -35,21 +42,27 @@ export default function ListDelivery() {
       }
     }
     load();
-  }, [page, delivery]);
+  }, [page, product]);
 
   useEffect(() => {
     loadDeliveries();
-  }, [page, delivery, loadDeliveries]);
+  }, [page, product, loadDeliveries]);
 
-  async function handleSearch({ deliverySearch }) {
-    await setDelivery(deliverySearch);
+  async function handleSearch({ productSearch }) {
+    await setProduct(productSearch);
   }
 
   return (
     <Container>
       <Content>
         <h1>Gerenciando encomendas</h1>
-        <div>
+        <Options>
+          <Form onSubmit={handleSearch}>
+            <span>
+              <MdSearch size={22} color="#999999" />
+            </span>
+            <Input name="productSearch" placeholder="Buscar encomendas" />
+          </Form>
           <NewButton
             title="CADASTRAR"
             loading={loading}
@@ -59,14 +72,7 @@ export default function ListDelivery() {
               history.push('/delivery/store');
             }}
           />
-
-          <Form onSubmit={handleSearch}>
-            <span>
-              <MdSearch size={22} color="#999999" />
-            </span>
-            <Input name="studentSearch" placeholder="Buscar aluno" />
-          </Form>
-        </div>
+        </Options>
       </Content>
       <ContentTable>
         {loading ? (
@@ -108,13 +114,19 @@ export default function ListDelivery() {
               {deliverys.map(item => (
                 <tr key={item.id}>
                   <td>
-                    <p>{item.}</p>
-                  </td>
-                  <td >
-                    <p>{item.}</p>
+                    <p>#{item.id}</p>
                   </td>
                   <td>
-                    <p>{item.}</p>
+                    <p>{item.recipient.name}</p>
+                  </td>
+                  <td>
+                    <p>{item.deliveryman.name}</p>
+                  </td>
+                  <td>
+                    <p>{item.recipient.city}</p>
+                  </td>
+                  <td>
+                    <p>{item.recipient.state}</p>
                   </td>
                 </tr>
               ))}

@@ -2,18 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 0px auto;
 `;
 
 export const Content = styled.div`
   max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  div {
-    display: flex;
-  }
+  margin: 20px;
+
   form {
     input {
       width: 237px;
@@ -29,12 +24,20 @@ export const Content = styled.div`
         color: #999999;
       }
     }
+
     span {
       position: absolute;
       margin-left: 10px;
       margin-top: 8px;
     }
   }
+`;
+
+export const Options = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const ContentTable = styled.div`
@@ -89,28 +92,4 @@ export const Row = styled.div`
     line-height: 20px;
     color: #666666;
   }
-`;
-
-export const ButtonEdit = styled.button`
-  font-size: 15px;
-  line-height: 18px;
-  text-align: right;
-  color: #4d85ee;
-  border: 0;
-  background: #fff;
-  padding: 0;
-  margin-right: 15px;
-  float: right;
-`;
-
-export const ButtonDelete = styled.button`
-  font-size: 15px;
-  line-height: 18px;
-  text-align: right;
-  color: #de3b3b;
-  border: 0;
-  background: #fff;
-  padding: 0;
-  margin-right: 15px;
-  float: left;
 `;

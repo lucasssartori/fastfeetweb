@@ -27,7 +27,6 @@ export const Container = styled.button.attrs(props => ({
   font-size: 14px;
   line-height: 16px;
   border: 0;
-  margin: 0 10px;
 
   &[disabled] {
     justify-content: center;
