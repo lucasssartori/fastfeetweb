@@ -46,10 +46,10 @@ export default function Header() {
     <Container>
       <Content>
         <Link to="/">
-          <img src={logo} alt="GymPoint" />
+          <img src={logo} alt="Fastfeet" />
         </Link>
         <button type="button" className="menu" onClick={() => handleMenu()}>
-          <IoMdMenu size={20} color="#ee4d64" />
+          <IoMdMenu size={20} color="#7d40e7" />
         </button>
         <div className={menuOpen}>
           <nav>
@@ -57,55 +57,55 @@ export default function Header() {
               <li>
                 <NavLink
                   activeClassName="chosen"
-                  to="/students/list"
+                  to="/delivery/list"
                   isActive={(match, location) => {
-                    if (location.pathname.indexOf('/students/') !== -1) {
+                    if (location.pathname.indexOf('/delivery/') !== -1) {
                       return true;
                     }
                     return false;
                   }}
                   onClick={handleCloseMenu}
                 >
-                  ALUNOS
+                  ENCOMENDAS
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   activeClassName="chosen"
-                  to="/plans/list"
+                  to="/deliveryman/list"
                   isActive={(match, location) => {
-                    if (location.pathname.indexOf('/plans/') !== -1) {
+                    if (location.pathname.indexOf('/deliveryman/') !== -1) {
                       return true;
                     }
                     return false;
                   }}
                   onClick={handleCloseMenu}
                 >
-                  PLANOS
+                  ENTREGADORES
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   activeClassName="chosen"
-                  to="/enrollments/list"
+                  to="/recipient/list"
                   isActive={(match, location) => {
-                    if (location.pathname.indexOf('/enrollments/') !== -1) {
+                    if (location.pathname.indexOf('/recipient/') !== -1) {
                       return true;
                     }
                     return false;
                   }}
                   onClick={handleCloseMenu}
                 >
-                  MATRÍCULAS
+                  DESTINATÁRIOS
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   activeClassName="chosen"
-                  to="/questions/list"
+                  to="/problems/list"
                   onClick={handleCloseMenu}
                 >
-                  PEDIDOS DE AUXÍLIO
+                  PROBLEMAS
                 </NavLink>
               </li>
             </ul>

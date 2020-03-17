@@ -106,7 +106,7 @@ export const Content = styled.div`
       }
 
       a:hover {
-        color: #ee4d64;
+        color: #7d40e7;
       }
 
       a.chosen {
@@ -135,7 +135,7 @@ export const Content = styled.div`
       font-size: 14px;
       line-height: 16px;
       text-align: right;
-      color: #de3b3b;
+      color: #7d40e7;
       border: 0;
       background: #fff;
       padding: 0;
