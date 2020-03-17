@@ -47,7 +47,7 @@ export const ContainerSignIn = styled.div`
     }
 
     span {
-      color: #7d40e7;
+      color: #f64c75;
       align-self: flex-start;
       margin-bottom: 20px;
       font-weight: bold;

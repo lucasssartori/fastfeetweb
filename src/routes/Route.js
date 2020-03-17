@@ -18,7 +18,7 @@ export default function RouteWrapper({
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/deliverys/list" />;
+    return <Redirect to="/delivery/list" />;
   }
 
   if (!signed) {
