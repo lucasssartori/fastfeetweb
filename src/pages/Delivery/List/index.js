@@ -5,8 +5,6 @@ import { Input, Form } from '@rocketseat/unform';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
 
-import { lighten } from 'polished';
-
 import api from '~/services/api';
 import history from '~/services/history';
 import Pagination from '~/components/Pagination';
@@ -25,7 +23,7 @@ export default function ListDelivery() {
   const [deliverys, setDeliverys] = useState([]);
   const [product = '', setProduct] = useState();
   const [page = 1, setPage] = useState();
-  const [loading = false, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
 
   const loadDeliveries = useCallback(() => {
     async function load() {
@@ -50,9 +48,15 @@ export default function ListDelivery() {
             } else {
               status = 'PENDENTE';
             }
-            const color = Math.floor(Math.random() * 16777215).toString(16);
-            const background = lighten(0.38, `#${color}`).substring(1);
-            delivery = { ...delivery, status, color, background };
+            const names = delivery.deliveryman.name.split(' ');
+
+            let init = '';
+            if (names.length > 1) {
+              init = names[0].substring(0, 1) + names[1].substring(0, 1);
+            } else {
+              init = names[0].substring(0, 2);
+            }
+            delivery = { ...delivery, status, init };
             return delivery;
           })
         );
@@ -141,14 +145,19 @@ export default function ListDelivery() {
                     <p>{item.recipient.name}</p>
                   </td>
                   <td>
-                    <img
-                      src={
-                        item.deliveryman.avatar
-                          ? item.deliveryman.avatar.path
-                          : `https://ui-avatars.com/api/?name=${item.deliveryman.name}&format=svg&color=${item.color}&background=${item.background}`
-                      }
-                    />
-                    <p>{item.deliveryman.name}</p>
+                    <div className="delivery_deliveryman">
+                      {item.deliveryman.avatar ? (
+                        <img
+                          src={item.deliveryman.avatar.url}
+                          alt={item.deliveryman.name}
+                        />
+                      ) : (
+                        <div className="deliveryman_init">
+                          <p>{item.init}</p>
+                        </div>
+                      )}
+                      <p>{item.deliveryman.name}</p>
+                    </div>
                   </td>
                   <td>
                     <p>{item.recipient.city}</p>

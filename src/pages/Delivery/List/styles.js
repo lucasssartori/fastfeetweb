@@ -70,6 +70,7 @@ export const Table = styled.table`
     border-bottom: 1px solid #eeeeee;
     padding: 15px 0;
     text-align: left;
+
     p {
       font-size: 16px;
       line-height: 20px;
@@ -79,7 +80,7 @@ export const Table = styled.table`
     .delivery_status {
       border-radius: 15px;
       width: min-content;
-      padding: 4px 6px;
+      padding: 4px 6px 2px 6px;
       font-weight: bold;
       display: flex;
       flex-direction: row;
@@ -87,7 +88,7 @@ export const Table = styled.table`
       justify-content: space-between;
 
       p:first-child {
-        padding-right: 4px;
+        margin-right: 4px;
       }
     }
 
@@ -122,12 +123,40 @@ export const Table = styled.table`
         color: #4d85ee;
       }
     }
+
+    .delivery_deliveryman {
+      border-radius: 15px;
+      width: min-content;
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: #eee;
+        margin-right: 5px;
+      }
+    }
+
+    .deliveryman_init {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      align-items: center;
+      p {
+        color: ${Math.floor(Math.random() * 16777215).toString(16)};
+        font-size: 20px;
+      }
+    }
   }
   tr:last-child td {
     border-bottom: 0px;
-  }
-  .colLeft {
-    text-align: left;
   }
 `;
 
