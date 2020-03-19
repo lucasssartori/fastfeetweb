@@ -13,7 +13,7 @@ export default function InvalidRoute() {
         </Link>
         <p>404 - ROTA INVÁLIDA</p>
         <Link to="/">
-          <p>Volta tela SignIn</p>
+          <p>Voltar tela SignIn</p>
         </Link>
       </ContainerError>
     </Container>

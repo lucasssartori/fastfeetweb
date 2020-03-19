@@ -56,6 +56,7 @@ export const Table = styled.table`
     padding: 15px 0;
   }
   th {
+    text-align: left;
     strong {
       font-size: 16px;
       line-height: 19px;
@@ -68,11 +69,58 @@ export const Table = styled.table`
   td {
     border-bottom: 1px solid #eeeeee;
     padding: 15px 0;
-    text-align: center;
+    text-align: left;
     p {
       font-size: 16px;
       line-height: 20px;
       color: #666666;
+    }
+
+    .delivery_status {
+      border-radius: 15px;
+      width: min-content;
+      padding: 4px 6px;
+      font-weight: bold;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      p:first-child {
+        padding-right: 4px;
+      }
+    }
+
+    .PENDENTE {
+      background-color: #f0f0df;
+      p {
+        font-size: 14px;
+        color: #c1bc35;
+      }
+    }
+
+    .ENTREGUE {
+      background-color: #dff0df;
+      p {
+        font-size: 14px;
+        color: #2ca42b;
+      }
+    }
+
+    .CANCELADA {
+      background-color: #fab0b0;
+      p {
+        font-size: 14px;
+        color: #de3b3b;
+      }
+    }
+
+    .RETIRADA {
+      background-color: #bad2ff;
+      p {
+        font-size: 14px;
+        color: #4d85ee;
+      }
     }
   }
   tr:last-child td {

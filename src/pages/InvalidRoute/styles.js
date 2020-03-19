@@ -9,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerError = styled.div`
-  height: 448px;
+  height: 300px;
   width: 100%;
   max-width: 360px;
   display: flex;
@@ -22,13 +22,14 @@ export const ContainerError = styled.div`
 
   p {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 20px;
     margin-bottom: 50px;
   }
 `;
 
 export const Logo = styled.img`
-  height: 100px;
-  width: 153px;
-  margin: 50px;
+  height: 44px;
+  width: 259px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 `;

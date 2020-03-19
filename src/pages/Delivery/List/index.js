@@ -1,7 +1,11 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useCallback } from 'react';
 import { Input, Form } from '@rocketseat/unform';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import { MdAdd, MdSearch } from 'react-icons/md';
+import { FaCircle } from 'react-icons/fa';
+
+import { lighten } from 'polished';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -34,7 +38,24 @@ export default function ListDelivery() {
           },
         });
 
-        setDeliverys(response.data.deliverys);
+        setDeliverys(
+          response.data.deliverys.map(delivery => {
+            let status = '';
+            if (delivery.end_date !== null) {
+              status = 'ENTREGUE';
+            } else if (delivery.canceled_at !== null) {
+              status = 'CANCELADA';
+            } else if (delivery.start_date !== null) {
+              status = 'RETIRADA';
+            } else {
+              status = 'PENDENTE';
+            }
+            const color = Math.floor(Math.random() * 16777215).toString(16);
+            const background = lighten(0.38, `#${color}`).substring(1);
+            delivery = { ...delivery, status, color, background };
+            return delivery;
+          })
+        );
         setLoading(false);
       } catch (err) {
         setDeliverys([]);
@@ -120,6 +141,13 @@ export default function ListDelivery() {
                     <p>{item.recipient.name}</p>
                   </td>
                   <td>
+                    <img
+                      src={
+                        item.deliveryman.avatar
+                          ? item.deliveryman.avatar.path
+                          : `https://ui-avatars.com/api/?name=${item.deliveryman.name}&format=svg&color=${item.color}&background=${item.background}`
+                      }
+                    />
                     <p>{item.deliveryman.name}</p>
                   </td>
                   <td>
@@ -127,6 +155,14 @@ export default function ListDelivery() {
                   </td>
                   <td>
                     <p>{item.recipient.state}</p>
+                  </td>
+                  <td>
+                    <div className={`delivery_status ${item.status}`}>
+                      <p>
+                        <FaCircle size={12} />
+                      </p>
+                      <p> {item.status}</p>
+                    </div>
                   </td>
                 </tr>
               ))}
