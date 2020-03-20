@@ -21,11 +21,11 @@ export default function Button({ title, loading, IconButton, ...rest }) {
 
 Button.propTypes = {
   title: PropTypes.string.isRequired,
-  loading: PropTypes.bool,
+  loading: PropTypes.number,
   IconButton: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 };
 
 Button.defaultProps = {
-  loading: false,
+  loading: 0,
   IconButton: null,
 };

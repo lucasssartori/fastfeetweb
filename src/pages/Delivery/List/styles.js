@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   max-width: 1200px;
-  margin: 20px;
+  margin-top: 25px;
 
   form {
     input {
@@ -41,126 +41,30 @@ export const Options = styled.div`
 `;
 
 export const ContentTable = styled.div`
-  background: #fff;
   border-radius: 4px;
   width: auto;
   max-width: 1200px;
-  padding: 25px;
-  margin: 20px;
+  margin-top: 25px;
 `;
 
-export const Table = styled.table`
+export const Table = styled.div`
   width: 100%;
   max-width: 1200px;
-  tr {
-    padding: 15px 0;
+
+  strong {
+    font-size: 16px;
+    line-height: 19px;
+    color: #444444;
   }
-  th {
-    text-align: left;
-    strong {
-      font-size: 16px;
-      line-height: 19px;
-      color: #444444;
-    }
-  }
-  tr:hover {
-    border-bottom: 1px solid #eeeeee;
-  }
-  td {
-    border-bottom: 1px solid #eeeeee;
-    padding: 15px 0;
-    text-align: left;
 
-    p {
-      font-size: 16px;
-      line-height: 20px;
-      color: #666666;
-    }
-
-    .delivery_status {
-      border-radius: 15px;
-      width: min-content;
-      padding: 4px 6px 2px 6px;
-      font-weight: bold;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-
-      p:first-child {
-        margin-right: 4px;
-      }
-    }
-
-    .PENDENTE {
-      background-color: #f0f0df;
-      p {
-        font-size: 14px;
-        color: #c1bc35;
-      }
-    }
-
-    .ENTREGUE {
-      background-color: #dff0df;
-      p {
-        font-size: 14px;
-        color: #2ca42b;
-      }
-    }
-
-    .CANCELADA {
-      background-color: #fab0b0;
-      p {
-        font-size: 14px;
-        color: #de3b3b;
-      }
-    }
-
-    .RETIRADA {
-      background-color: #bad2ff;
-      p {
-        font-size: 14px;
-        color: #4d85ee;
-      }
-    }
-
-    .delivery_deliveryman {
-      border-radius: 15px;
-      width: min-content;
-      padding: 4px 6px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-
-      img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        background: #eee;
-        margin-right: 5px;
-      }
-    }
-
-    .deliveryman_init {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      align-items: center;
-      p {
-        color: ${Math.floor(Math.random() * 16777215).toString(16)};
-        font-size: 20px;
-      }
-    }
-  }
-  tr:last-child td {
-    border-bottom: 0px;
+  p {
+    font-size: 16px;
+    line-height: 20px;
+    color: #666666;
   }
 `;
 
-export const Row = styled.div`
+export const Mensagem = styled.div`
   display: flex;
   align-items: center;
   padding: 15px 0;
@@ -169,4 +73,152 @@ export const Row = styled.div`
     line-height: 20px;
     color: #666666;
   }
+`;
+
+export const Header = styled.div`
+  width: auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  padding: 0 25px;
+
+  margin-bottom: 21px;
+`;
+
+export const TableRow = styled.div`
+  width: auto;
+  max-width: 1200px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  height: 57px;
+  margin-bottom: 21px;
+  padding: 0 25px;
+
+  border-radius: 5px;
+  background: #fff;
+`;
+
+export const ID = styled.div`
+  width: auto;
+  max-width: 92px;
+  flex: 1;
+`;
+
+export const Recipient = styled.div`
+  width: auto;
+  max-width: 230px;
+  flex: 1;
+`;
+
+export const DeliveryMan = styled.div`
+  width: auto;
+  max-width: 270px;
+  flex: 1;
+
+  .delivery_deliveryman {
+    border-radius: 15px;
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: #eee;
+      margin-right: 5px;
+    }
+
+    div {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      margin-right: 5px;
+      p {
+        font-weight: 400;
+        font-size: 16px;
+      }
+    }
+  }
+`;
+
+export const City = styled.div`
+  width: auto;
+  max-width: 200px;
+  flex: 1;
+`;
+
+export const State = styled.div`
+  width: auto;
+  max-width: 150px;
+  flex: 1;
+`;
+
+export const Status = styled.div`
+  width: auto;
+  max-width: 170px;
+  flex: 1;
+
+  .delivery_status {
+    border-radius: 15px;
+    width: min-content;
+    padding: 4px 6px 2px 6px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    p:first-child {
+      margin-right: 4px;
+    }
+  }
+
+  .PENDENTE {
+    background-color: #f0f0df;
+    p {
+      font-size: 14px;
+      color: #c1bc35;
+    }
+  }
+
+  .ENTREGUE {
+    background-color: #dff0df;
+    p {
+      font-size: 14px;
+      color: #2ca42b;
+    }
+  }
+
+  .CANCELADA {
+    background-color: #fab0b0;
+    p {
+      font-size: 14px;
+      color: #de3b3b;
+    }
+  }
+
+  .RETIRADA {
+    background-color: #bad2ff;
+    p {
+      font-size: 14px;
+      color: #4d85ee;
+    }
+  }
+`;
+
+export const Actions = styled.div`
+  width: auto;
+  max-width: 50px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 `;
