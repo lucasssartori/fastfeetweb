@@ -2,14 +2,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Input, Form } from '@rocketseat/unform';
 // import { toast } from 'react-toastify';
-import { MdAdd, MdSearch } from 'react-icons/md';
+import { MdAdd, MdSearch, MdMoreHoriz } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
-import { transparentize } from 'polished';
 
 import api from '~/services/api';
 import history from '~/services/history';
 import Pagination from '~/components/Pagination';
-import NewButton from '~/components/Button';
+import AddButton from '~/components/Button';
+import InitialName from '~/components/InitialName';
 
 import {
   Container,
@@ -27,6 +27,8 @@ import {
   Status,
   Actions,
   TableRow,
+  BtnAction,
+  TextTable,
 } from './styles';
 
 export default function ListDelivery() {
@@ -58,28 +60,9 @@ export default function ListDelivery() {
             } else {
               status = 'PENDENTE';
             }
-            const names = delivery.deliveryman.name.split(' ');
-
-            let init = '';
-            if (names.length > 1) {
-              init = names[0].substring(0, 1) + names[1].substring(0, 1);
-            } else {
-              init = names[0].substring(0, 2);
-            }
-
-            const red = Math.floor(Math.random() * 256);
-            const green = Math.floor(Math.random() * 256);
-            const blue = Math.floor(Math.random() * 256);
-            const colorStyle = `rgb(${red},${green},${blue})`;
-
-            const backgorundStyle = transparentize(0.9, colorStyle);
-
             delivery = {
               ...delivery,
               status,
-              init,
-              colorStyle,
-              backgorundStyle,
             };
             return delivery;
           })
@@ -112,7 +95,7 @@ export default function ListDelivery() {
             </span>
             <Input name="productSearch" placeholder="Buscar encomendas" />
           </Form>
-          <NewButton
+          <AddButton
             title="CADASTRAR"
             loading={loading}
             IconButton={MdAdd}
@@ -160,10 +143,10 @@ export default function ListDelivery() {
             {deliverys.map(item => (
               <TableRow key={item.id}>
                 <ID>
-                  <p>#{item.id}</p>
+                  <TextTable>#{item.id}</TextTable>
                 </ID>
                 <Recipient>
-                  <p>{item.recipient.name}</p>
+                  <TextTable>{item.recipient.name}</TextTable>
                 </Recipient>
                 <DeliveryMan>
                   <div className="delivery_deliveryman">
@@ -173,29 +156,29 @@ export default function ListDelivery() {
                         alt={item.deliveryman.name}
                       />
                     ) : (
-                      <div style={{ backgroundColor: item.backgorundStyle }}>
-                        <p style={{ color: item.colorStyle }}>{item.init}</p>
-                      </div>
+                      <InitialName name={item.deliveryman.name} size={35} />
                     )}
-                    <p>{item.deliveryman.name}</p>
+                    <TextTable>{item.deliveryman.name}</TextTable>
                   </div>
                 </DeliveryMan>
                 <City>
-                  <p>{item.recipient.city}</p>
+                  <TextTable>{item.recipient.city}</TextTable>
                 </City>
                 <State>
-                  <p>{item.recipient.state}</p>
+                  <TextTable>{item.recipient.state}</TextTable>
                 </State>
                 <Status>
                   <div className={`delivery_status ${item.status}`}>
-                    <p>
+                    <TextTable>
                       <FaCircle size={12} />
-                    </p>
-                    <p>{item.status}</p>
+                    </TextTable>
+                    <TextTable>{item.status}</TextTable>
                   </div>
                 </Status>
                 <Actions>
-                  <p>...</p>
+                  <BtnAction type="button">
+                    <MdMoreHoriz size={22} color="#999999" />
+                  </BtnAction>
                 </Actions>
               </TableRow>
             ))}

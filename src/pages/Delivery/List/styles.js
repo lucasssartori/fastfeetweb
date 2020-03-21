@@ -56,12 +56,12 @@ export const Table = styled.div`
     line-height: 19px;
     color: #444444;
   }
+`;
 
-  p {
-    font-size: 16px;
-    line-height: 20px;
-    color: #666666;
-  }
+export const TextTable = styled.p`
+  font-size: 16px;
+  line-height: 20px;
+  color: #666666;
 `;
 
 export const Mensagem = styled.div`
@@ -132,20 +132,6 @@ export const DeliveryMan = styled.div`
       border: 1px solid rgba(255, 255, 255, 0.3);
       background: #eee;
       margin-right: 5px;
-    }
-
-    div {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      margin-right: 5px;
-      p {
-        font-weight: 400;
-        font-size: 16px;
-      }
     }
   }
 `;
@@ -221,4 +207,14 @@ export const Actions = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+`;
+
+export const BtnAction = styled.button`
+  background: #fff;
+  display: flex;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  height: fit-content;
 `;
