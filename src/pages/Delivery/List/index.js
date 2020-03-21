@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Input, Form } from '@rocketseat/unform';
 // import { toast } from 'react-toastify';
-import { MdAdd, MdSearch, MdMoreHoriz } from 'react-icons/md';
+import { MdAdd, MdSearch } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
 
 import api from '~/services/api';
@@ -10,6 +10,7 @@ import history from '~/services/history';
 import Pagination from '~/components/Pagination';
 import AddButton from '~/components/Button';
 import InitialName from '~/components/InitialName';
+import Actions from '~/components/MenuActions';
 
 import {
   Container,
@@ -19,15 +20,14 @@ import {
   Table,
   Mensagem,
   Header,
-  ID,
-  Recipient,
-  DeliveryMan,
-  City,
-  State,
-  Status,
-  Actions,
+  DivID,
+  DivRecipient,
+  DivDeliveryMan,
+  DivCity,
+  DivState,
+  DivStatus,
+  DivActions,
   TableRow,
-  BtnAction,
   TextTable,
 } from './styles';
 
@@ -80,8 +80,12 @@ export default function ListDelivery() {
     loadDeliveries();
   }, [page, product, loadDeliveries]);
 
-  async function handleSearch({ productSearch }) {
-    await setProduct(productSearch);
+  function handleSearch({ productSearch }) {
+    setProduct(productSearch);
+  }
+
+  function handleDelete() {
+    console.tron.log('handleDelete');
   }
 
   return (
@@ -118,37 +122,37 @@ export default function ListDelivery() {
         ) : (
           <Table>
             <Header>
-              <ID>
+              <DivID>
                 <strong>ID</strong>
-              </ID>
-              <Recipient>
+              </DivID>
+              <DivRecipient>
                 <strong>Destinatário</strong>
-              </Recipient>
-              <DeliveryMan>
+              </DivRecipient>
+              <DivDeliveryMan>
                 <strong>Entregador</strong>
-              </DeliveryMan>
-              <City>
+              </DivDeliveryMan>
+              <DivCity>
                 <strong>Cidade</strong>
-              </City>
-              <State>
+              </DivCity>
+              <DivState>
                 <strong>Estado</strong>
-              </State>
-              <Status>
+              </DivState>
+              <DivStatus>
                 <strong>Status</strong>
-              </Status>
-              <Actions>
+              </DivStatus>
+              <DivActions>
                 <strong>Ações</strong>
-              </Actions>
+              </DivActions>
             </Header>
             {deliverys.map(item => (
               <TableRow key={item.id}>
-                <ID>
+                <DivID>
                   <TextTable>#{item.id}</TextTable>
-                </ID>
-                <Recipient>
+                </DivID>
+                <DivRecipient>
                   <TextTable>{item.recipient.name}</TextTable>
-                </Recipient>
-                <DeliveryMan>
+                </DivRecipient>
+                <DivDeliveryMan>
                   <div className="delivery_deliveryman">
                     {item.deliveryman.avatar ? (
                       <img
@@ -160,26 +164,26 @@ export default function ListDelivery() {
                     )}
                     <TextTable>{item.deliveryman.name}</TextTable>
                   </div>
-                </DeliveryMan>
-                <City>
+                </DivDeliveryMan>
+                <DivCity>
                   <TextTable>{item.recipient.city}</TextTable>
-                </City>
-                <State>
+                </DivCity>
+                <DivState>
                   <TextTable>{item.recipient.state}</TextTable>
-                </State>
-                <Status>
+                </DivState>
+                <DivStatus>
                   <div className={`delivery_status ${item.status}`}>
                     <TextTable>
                       <FaCircle size={12} />
                     </TextTable>
                     <TextTable>{item.status}</TextTable>
                   </div>
-                </Status>
-                <Actions>
-                  <BtnAction type="button">
-                    <MdMoreHoriz size={22} color="#999999" />
-                  </BtnAction>
-                </Actions>
+                </DivStatus>
+                <Actions
+                  Show={() => history.push('/delivery/store')}
+                  Edit={() => history.push('/delivery/store')}
+                  Delete={handleDelete}
+                />
               </TableRow>
             ))}
           </Table>

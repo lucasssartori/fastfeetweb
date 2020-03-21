@@ -101,19 +101,19 @@ export const TableRow = styled.div`
   background: #fff;
 `;
 
-export const ID = styled.div`
+export const DivID = styled.div`
   width: auto;
   max-width: 92px;
   flex: 1;
 `;
 
-export const Recipient = styled.div`
+export const DivRecipient = styled.div`
   width: auto;
   max-width: 230px;
   flex: 1;
 `;
 
-export const DeliveryMan = styled.div`
+export const DivDeliveryMan = styled.div`
   width: auto;
   max-width: 270px;
   flex: 1;
@@ -136,19 +136,19 @@ export const DeliveryMan = styled.div`
   }
 `;
 
-export const City = styled.div`
+export const DivCity = styled.div`
   width: auto;
   max-width: 200px;
   flex: 1;
 `;
 
-export const State = styled.div`
+export const DivState = styled.div`
   width: auto;
   max-width: 150px;
   flex: 1;
 `;
 
-export const Status = styled.div`
+export const DivStatus = styled.div`
   width: auto;
   max-width: 170px;
   flex: 1;
@@ -201,20 +201,10 @@ export const Status = styled.div`
   }
 `;
 
-export const Actions = styled.div`
+export const DivActions = styled.div`
   width: auto;
   max-width: 50px;
   flex: 1;
   display: flex;
   justify-content: center;
-`;
-
-export const BtnAction = styled.button`
-  background: #fff;
-  display: flex;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  width: fit-content;
-  height: fit-content;
 `;
