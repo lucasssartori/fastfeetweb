@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useCallback } from 'react';
 import { Input, Form } from '@rocketseat/unform';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
+import { confirmAlert } from 'react-confirm-alert';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -84,8 +85,39 @@ export default function ListDelivery() {
     setProduct(productSearch);
   }
 
-  function handleDelete() {
-    console.tron.log('handleDelete');
+  async function handleDelete(deliveryDelete) {
+    try {
+      const response = await api.delete(`deliveries/${deliveryDelete.id}`);
+      if (response.status !== 200) {
+        toast.warn('Não foi possível excluir a encomenda!');
+      } else {
+        toast.success('Encomenda excluida com sucesso!');
+        loadDeliveries();
+      }
+    } catch (error) {
+      console.error(error);
+      console.tron.log(error);
+      toast.error('Erro para excluir a encomenda.');
+    }
+  }
+
+  function confirmDelete(deliveryDelete) {
+    confirmAlert({
+      title: 'Exclusão',
+      message: 'Deseja excluir a encomenda?',
+      buttons: [
+        {
+          label: 'Apagar',
+          onClick: () => {
+            handleDelete(deliveryDelete);
+          },
+        },
+        {
+          label: 'Cancelar',
+          onClick: () => toast.warn('Exclusão Cancelada!'),
+        },
+      ],
+    });
   }
 
   return (
@@ -182,7 +214,7 @@ export default function ListDelivery() {
                 <Actions
                   Show={() => history.push('/delivery/store')}
                   Edit={() => history.push('/delivery/store')}
-                  Delete={handleDelete}
+                  Delete={() => confirmDelete(item)}
                 />
               </TableRow>
             ))}
