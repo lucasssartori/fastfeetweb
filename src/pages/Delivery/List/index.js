@@ -5,7 +5,9 @@ import { toast } from 'react-toastify';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
+import { useDispatch } from 'react-redux';
 
+import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 import history from '~/services/history';
 import Pagination from '~/components/Pagination';
@@ -38,6 +40,25 @@ export default function ListDelivery() {
   const [page = 1, setPage] = useState();
   const [loading = 0, setLoading] = useState();
 
+  const dispatch = useDispatch();
+
+  const trataError = useCallback(
+    error => {
+      switch (error.response.status) {
+        case 400:
+          toast.error(error.response.data.error);
+          break;
+        case 401:
+          toast.error(error.response.data.error);
+          dispatch(signOut());
+          break;
+        default:
+          toast.error('Erro inesperado do sistema');
+      }
+    },
+    [dispatch]
+  );
+
   const loadDeliveries = useCallback(() => {
     async function load() {
       try {
@@ -69,13 +90,14 @@ export default function ListDelivery() {
           })
         );
         setLoading(0);
-      } catch (err) {
+      } catch (error) {
         setDeliverys([]);
         setLoading(0);
+        trataError(error);
       }
     }
     load();
-  }, [page, product]);
+  }, [page, product, trataError]);
 
   useEffect(() => {
     loadDeliveries();
@@ -88,16 +110,14 @@ export default function ListDelivery() {
   async function handleDelete(deliveryDelete) {
     try {
       const response = await api.delete(`deliveries/${deliveryDelete.id}`);
-      if (response.status !== 200) {
-        toast.warn('Não foi possível excluir a encomenda!');
-      } else {
-        toast.success('Encomenda excluida com sucesso!');
+      if (response.status === 200) {
+        toast.success('Encomenda apagada com sucesso!');
         loadDeliveries();
+      } else {
+        toast.warn('Não foi possível apagar a encomenda!');
       }
     } catch (error) {
-      console.error(error);
-      console.tron.log(error);
-      toast.error('Erro para excluir a encomenda.');
+      trataError(error);
     }
   }
 
