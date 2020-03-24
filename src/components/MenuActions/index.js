@@ -38,7 +38,10 @@ export default function MenuActions({ Show, Edit, Delete }) {
   }
 
   return (
-    <Container>
+    <Container
+      onBlur={() => setVisible(false)}
+      onMouseLeave={() => setVisible(false)}
+    >
       <BtnAction type="button" onClick={handleToggleVisible}>
         <MdMoreHoriz size={18} color="#999999" />
       </BtnAction>
