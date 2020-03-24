@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import Button from '~/components/Button';
+
 export const Container = styled.div`
   max-width: 1200px;
   margin: 0px auto;
@@ -207,4 +209,10 @@ export const DivActions = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+`;
+
+export const AddButton = styled(Button)`
+  width: 142px;
+  height: 36px;
+  padding: 0px 15px;
 `;

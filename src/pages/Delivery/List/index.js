@@ -11,7 +11,6 @@ import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 import history from '~/services/history';
 import Pagination from '~/components/Pagination';
-import AddButton from '~/components/Button';
 import InitialName from '~/components/InitialName';
 import Actions from '~/components/MenuActions';
 
@@ -32,6 +31,7 @@ import {
   DivActions,
   TableRow,
   TextTable,
+  AddButton,
 } from './styles';
 
 export default function ListDelivery() {

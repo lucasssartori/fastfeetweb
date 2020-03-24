@@ -16,9 +16,6 @@ export const Container = styled.button.attrs(props => ({
   justify-content: space-between;
   align-items: center;
 
-  width: 142px;
-  height: 36px;
-  padding: 0px 15px;
   color: #fff;
 
   background: #7d40e7;
