@@ -140,6 +140,14 @@ export default function ListDelivery() {
     });
   }
 
+  function handleEdit(deliveryEdit) {
+    const edit = () => history.push(`/delivery/update/${deliveryEdit.id}`);
+    if (deliveryEdit.status === 'PENDENTE') {
+      return edit;
+    }
+    return null;
+  }
+
   return (
     <Container>
       <Content>
@@ -233,7 +241,7 @@ export default function ListDelivery() {
                 </DivStatus>
                 <Actions
                   Show={() => history.push('/delivery/store')}
-                  Edit={() => history.push('/delivery/store')}
+                  Edit={handleEdit(item)}
                   Delete={() => confirmDelete(item)}
                 />
               </TableRow>
