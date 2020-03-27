@@ -101,7 +101,7 @@ export default function ListDelivery() {
 
   useEffect(() => {
     loadDeliveries();
-  }, [page, product, loadDeliveries]);
+  }, [loadDeliveries]);
 
   function handleSearch({ productSearch }) {
     setProduct(productSearch);
