@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AsyncSelect from 'react-select/async';
 
-import { useField } from '@rocketseat/unform';
+import { useField } from '@unform/core';
 
 export default function ReactAsyncSelect({
   name,

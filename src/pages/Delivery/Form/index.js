@@ -1,10 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Form, Input } from '@rocketseat/unform';
+import { Form } from '@unform/web';
 import { MdArrowBack, MdSave } from 'react-icons/md';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+
+import Input from '~/components/SimpleInput';
+import { signOut } from '~/store/modules/auth/actions';
+import api from '~/services/api';
+import history from '~/services/history';
 
 import {
   Container,
@@ -17,20 +22,6 @@ import {
   Async,
 } from './styles';
 
-import { signOut } from '~/store/modules/auth/actions';
-import api from '~/services/api';
-import history from '~/services/history';
-
-const schema = Yup.object().shape({
-  product: Yup.string().required('O produto é obrigatório'),
-  recipient: Yup.string()
-    .required('O destinatário é obrigatório')
-    .typeError('O destinatário está inválido'),
-  deliveryman: Yup.string()
-    .required('O entregador é obrigatório')
-    .typeError('O entregador está inválido'),
-});
-
 export default function StoreDelivery() {
   const { id } = useParams();
 
@@ -40,6 +31,8 @@ export default function StoreDelivery() {
   const [recipient, setRecipient] = useState('');
   const [deliveryman, setDeliveryman] = useState('');
   const [delivery, setDelivery] = useState('');
+
+  const formRef = useRef(null);
 
   const trataError = useCallback(
     error => {
@@ -145,8 +138,26 @@ export default function StoreDelivery() {
     loadDelivery();
   }, [id, trataError]);
 
-  async function handleSubmitAdd({ product }) {
+  async function handleSubmitAdd(data) {
     try {
+      formRef.current.setErrors({});
+
+      const schema = Yup.object().shape({
+        product: Yup.string().required('O produto é obrigatório'),
+        recipient: Yup.string()
+          .required('O destinatário é obrigatório')
+          .typeError('O destinatário está inválido'),
+        deliveryman: Yup.string()
+          .required('O entregador é obrigatório')
+          .typeError('O entregador está inválido'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      const { product } = data;
+
       if (id) {
         const response = await api.put(`deliveries/${id}`, {
           product,
@@ -174,8 +185,16 @@ export default function StoreDelivery() {
           toast.warn('Não foi possível cadastrar a encomenda!');
         }
       }
-    } catch (error) {
-      trataError(error);
+    } catch (errors) {
+      const validationErrors = {};
+      if (errors instanceof Yup.ValidationError) {
+        errors.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+        formRef.current.setErrors(validationErrors);
+      } else {
+        trataError(errors);
+      }
     }
   }
 
@@ -203,7 +222,7 @@ export default function StoreDelivery() {
       <ContentForm>
         <Form
           initialData={delivery}
-          schema={schema}
+          ref={formRef}
           id="delivery"
           onSubmit={handleSubmitAdd}
         >

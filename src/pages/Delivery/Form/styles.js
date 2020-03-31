@@ -54,6 +54,14 @@ export const DivContacts = styled.div`
       line-height: 19px;
       font-weight: bold;
     }
+
+    span {
+      color: #f64c75;
+      align-self: flex-start;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
   }
 `;
 
@@ -81,5 +89,13 @@ export const DivProduct = styled.div`
     height: 45px;
     margin-top: 9px;
     padding: 0 10px;
+  }
+
+  span {
+    color: #f64c75;
+    align-self: flex-start;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
   }
 `;

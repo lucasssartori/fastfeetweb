@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import { Form as Unform } from '@unform/web';
 
 export const Container = styled.div`
   height: 100%;
@@ -20,52 +21,52 @@ export const ContainerSignIn = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0px 30px;
+`;
 
-  form {
-    margin-top: 30px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
+export const Form = styled(Unform)`
+  margin-top: 30px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
 
-    p {
-      font-weight: bold;
-      padding-bottom: 8px;
+  label {
+    font-weight: bold;
+    padding-bottom: 8px;
+  }
+
+  input {
+    height: 45px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 2px;
+
+    &::placeholder {
+      color: #dddddd;
     }
+  }
 
-    input {
-      height: 45px;
-      background: #ffffff;
-      border: 1px solid #dddddd;
-      box-sizing: border-box;
-      border-radius: 4px;
-      margin-bottom: 20px;
-      padding: 2px;
+  span {
+    color: #f64c75;
+    align-self: flex-start;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
 
-      &::placeholder {
-        color: #dddddd;
-      }
-    }
+  button {
+    height: 45px;
+    background: #7d40e7;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #ffffff;
+    border: 0px;
+    transition: background 0.2s;
+    margin-bottom: 50px;
 
-    span {
-      color: #f64c75;
-      align-self: flex-start;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-
-    button {
-      height: 45px;
-      background: #7d40e7;
-      border-radius: 4px;
-      font-size: 16px;
-      color: #ffffff;
-      border: 0px;
-      transition: background 0.2s;
-      margin-bottom: 50px;
-
-      &:hover {
-        background: ${darken(0.08, '#7D40E7')};
-      }
+    &:hover {
+      background: ${darken(0.08, '#7D40E7')};
     }
   }
 `;
