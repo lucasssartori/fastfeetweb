@@ -43,7 +43,7 @@ export default function StoreDelivery() {
 
   const trataError = useCallback(
     error => {
-      if (error.response.status) {
+      if (error.response) {
         switch (error.response.status) {
           case 400:
             toast.error(error.response.data.error);
@@ -189,7 +189,7 @@ export default function StoreDelivery() {
             IconButton={MdArrowBack}
             type="button"
             onClick={() => {
-              history.push('/enrollments/list');
+              history.push('/delivery/list');
             }}
           />
           <SaveButton

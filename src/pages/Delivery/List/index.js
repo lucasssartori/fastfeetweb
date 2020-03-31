@@ -44,16 +44,20 @@ export default function ListDelivery() {
 
   const trataError = useCallback(
     error => {
-      switch (error.response.status) {
-        case 400:
-          toast.error(error.response.data.error);
-          break;
-        case 401:
-          toast.error(error.response.data.error);
-          dispatch(signOut());
-          break;
-        default:
-          toast.error('Erro inesperado do sistema');
+      if (error.response) {
+        switch (error.response.status) {
+          case 400:
+            toast.error(error.response.data.error);
+            break;
+          case 401:
+            toast.error(error.response.data.error);
+            dispatch(signOut());
+            break;
+          default:
+            toast.error('Erro inesperado do sistema');
+        }
+      } else {
+        toast.error('Erro inesperado do sistema');
       }
     },
     [dispatch]
