@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Form, Input } from '@rocketseat/unform';
+import { Form } from '@unform/web';
 import { MdArrowBack, MdSave } from 'react-icons/md';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
+import Input from '~/components/SimpleInput';
 import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -19,11 +20,6 @@ import {
   ContentForm,
 } from './styles';
 
-const schema = Yup.object().shape({
-  name: Yup.string().required('O nome é obrigatório'),
-  email: Yup.string().required('O email é obrigatório'),
-});
-
 export default function StoreDeliveryMan() {
   const { id } = useParams();
 
@@ -32,6 +28,8 @@ export default function StoreDeliveryMan() {
   const [titleForm, setTitle] = useState();
   const [deliveryman, setDeliveryman] = useState();
   const [initialName, setInitialName] = useState();
+
+  const formRef = useRef(null);
 
   const trataError = useCallback(
     error => {
@@ -75,14 +73,25 @@ export default function StoreDeliveryMan() {
   }, [id, trataError]);
 
   async function handleSubmitAdd(data) {
-    console.log(data);
-    /*
     try {
+      formRef.current.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('O nome é obrigatório'),
+        email: Yup.string().required('O email é obrigatório'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      const { name, email, avatar } = data;
+
       if (id) {
         const response = await api.put(`deliveryman/${id}`, {
           name,
           email,
-          avatar_id,
+          avatar_id: avatar,
         });
 
         if (response.status === 200) {
@@ -95,7 +104,7 @@ export default function StoreDeliveryMan() {
         const response = await api.post(`deliveryman`, {
           name,
           email,
-          avatar_id,
+          avatar_id: avatar,
         });
 
         if (response.status === 200) {
@@ -105,10 +114,17 @@ export default function StoreDeliveryMan() {
           toast.warn('Não foi possível cadastrar o entregador!');
         }
       }
-    } catch (error) {
-      trataError(error);
+    } catch (errors) {
+      const validationErrors = {};
+      if (errors instanceof Yup.ValidationError) {
+        errors.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+        formRef.current.setErrors(validationErrors);
+      } else {
+        trataError(errors);
+      }
     }
-    */
   }
 
   return (
@@ -135,12 +151,12 @@ export default function StoreDeliveryMan() {
       <ContentForm>
         <Form
           initialData={deliveryman}
-          schema={schema}
+          ref={formRef}
           id="deliveryman"
           onSubmit={handleSubmitAdd}
         >
           <div>
-            <AvatarInput name="avatar_id" initialName={initialName} />
+            <AvatarInput name="avatar" initialName={initialName} />
           </div>
           <label htmlFor="name">Nome</label>
           <Input
