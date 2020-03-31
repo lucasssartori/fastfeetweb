@@ -5,7 +5,9 @@ export const Page = styled.div`
   flex: 1;
   justify-content: center;
   margin-top: 10px;
+  margin-bottom: 20px;
   align-items: center;
+
   button {
     border: none;
     background: #7d40e7;
