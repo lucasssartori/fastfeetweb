@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useCallback } from 'react';
-import { Input, Form } from '@rocketseat/unform';
+import { Form } from '@unform/web';
 import { toast } from 'react-toastify';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch } from 'react-redux';
 
+import Input from '~/components/SimpleInput';
 import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -161,7 +162,7 @@ export default function ListDelivery() {
             <span>
               <MdSearch size={22} color="#999999" />
             </span>
-            <Input name="productSearch" placeholder="Buscar encomendas" />
+            <Input name="productSearch" placeholder="Buscar por encomendas" />
           </Form>
           <AddButton
             title="CADASTRAR"
@@ -243,11 +244,13 @@ export default function ListDelivery() {
                     <TextTable>{item.status}</TextTable>
                   </div>
                 </DivStatus>
-                <Actions
-                  Show={() => history.push('/delivery/store')}
-                  Edit={handleEdit(item)}
-                  Delete={() => confirmDelete(item)}
-                />
+                <DivActions>
+                  <Actions
+                    Show={() => history.push('/delivery/store')}
+                    Edit={handleEdit(item)}
+                    Delete={() => confirmDelete(item)}
+                  />
+                </DivActions>
               </TableRow>
             ))}
           </Table>

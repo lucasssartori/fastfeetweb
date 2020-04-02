@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useCallback } from 'react';
-import { Input, Form } from '@rocketseat/unform';
+import { Form } from '@unform/web';
 import { toast } from 'react-toastify';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch } from 'react-redux';
 
+import Input from '~/components/SimpleInput';
 import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -132,7 +133,7 @@ export default function ListDeliveryMan() {
             <span>
               <MdSearch size={22} color="#999999" />
             </span>
-            <Input name="nameSearch" placeholder="Buscar encomendas" />
+            <Input name="nameSearch" placeholder="Buscar por entregadores" />
           </Form>
           <AddButton
             title="CADASTRAR"

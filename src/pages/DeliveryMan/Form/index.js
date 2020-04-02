@@ -158,14 +158,14 @@ export default function StoreDeliveryMan() {
           <div>
             <AvatarInput name="avatar" initialName={initialName} />
           </div>
-          <label htmlFor="name">Nome</label>
           <Input
+            label="Nome"
             name="name"
             placeholder="Digite o nome completo"
             onChange={e => setInitialName(e.target.value)}
           />
-          <label htmlFor="email">Email</label>
           <Input
+            label="Email"
             name="email"
             type="email"
             placeholder="Digite seu endereço de e-mail"
