@@ -81,20 +81,31 @@ export default function StoreDeliveryMan() {
 
       const schema = Yup.object().shape({
         name: Yup.string().required('O nome é obrigatório'),
-        email: Yup.string().required('O email é obrigatório'),
+        street: Yup.string().required('A rua é obrigatória'),
+        number: Yup.number()
+          .min(0, 'Valor deve ser positivo')
+          .required('O número é obrigatório')
+          .typeError('Valor deve ser numérico'),
+        city: Yup.string().required('A cidade é obrigatório'),
+        state: Yup.string().required('O estado é obrigatório'),
+        zipcode: Yup.string().required('O CEP é obrigatório'),
       });
 
       await schema.validate(data, {
         abortEarly: false,
       });
 
-      const { name, email, avatar } = data;
+      const { name, street, number, complement, city, state, zipcode } = data;
 
       if (id) {
         const response = await api.put(`recipients/${id}`, {
           name,
-          email,
-          avatar_id: avatar,
+          street,
+          number,
+          complement,
+          city,
+          state,
+          zipcode,
         });
 
         if (response.status === 200) {
@@ -104,10 +115,14 @@ export default function StoreDeliveryMan() {
           toast.warn('Não foi possível atualizar o destinatário!');
         }
       } else {
-        const response = await api.post(`recipient`, {
+        const response = await api.post(`recipients`, {
           name,
-          email,
-          avatar_id: avatar,
+          street,
+          number,
+          complement,
+          city,
+          state,
+          zipcode,
         });
 
         if (response.status === 200) {
@@ -161,18 +176,27 @@ export default function StoreDeliveryMan() {
           <InputName
             label="Nome"
             name="name"
-            placeholder="Digite o nome completo"
+            placeholder="Ludwig van Beethoven"
           />
-          <InputStreet
-            label="Rua"
-            name="street"
-            placeholder="Digite seu endereço"
-          />
-          <InputNumber label="Número" name="number" type="number" />
-          <InputComplement label="Complemento" name="complement" />
-          <InputCity label="Cidade" name="city" />
-          <InputState label="Estado" name="state" />
-          <InputZipcode label="CEP" name="zipcode" />
+          <div>
+            <InputStreet
+              label="Rua"
+              name="street"
+              placeholder="Rua Beethoven"
+            />
+            <InputNumber
+              label="Número"
+              name="number"
+              type="number"
+              placeholder="1729"
+            />
+            <InputComplement label="Complemento" name="complement" />
+          </div>
+          <div>
+            <InputCity label="Cidade" name="city" placeholder="Diadema" />
+            <InputState label="Estado" name="state" placeholder="São Paulo" />
+            <InputZipcode label="CEP" name="zipcode" placeholder="09960-580" />
+          </div>
         </Form>
       </ContentForm>
     </Container>

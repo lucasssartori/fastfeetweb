@@ -40,7 +40,9 @@ export default function Header() {
     }
   }
 
-  const { name } = useSelector(state => state.user.user);
+  const { name } = useSelector(state =>
+    state.user ? state.user.user : { name: '' }
+  );
 
   return (
     <Container>

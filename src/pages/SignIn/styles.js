@@ -48,13 +48,6 @@ export const Form = styled(Unform)`
     }
   }
 
-  span {
-    color: #f64c75;
-    align-self: flex-start;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-
   button {
     height: 45px;
     background: #7d40e7;

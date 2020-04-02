@@ -39,12 +39,6 @@ export const ContentForm = styled.div`
   background-color: #fff;
   padding: 26px 30px;
 
-  label {
-    font-size: 14px;
-    line-height: 19px;
-    font-weight: bold;
-  }
-
   input {
     border: 1px solid #dddddd;
     border-radius: 4px;
@@ -52,56 +46,52 @@ export const ContentForm = styled.div`
     height: 45px;
     margin-top: 9px;
     padding: 0 10px;
-  }
-
-  input {
     margin-bottom: 18px;
   }
 `;
 
 export const Form = styled(Unform)`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  flex: 1;
+  div {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
 `;
 
 export const InputName = styled(Input)`
-  display: flex;
   width: 100%;
   max-width: 840px;
 `;
 
 export const InputStreet = styled(Input)`
-  display: flex;
-  width: 100%;
-  max-width: 518px;
+  min-width: 510px;
+  max-width: 510px;
+  margin-right: 20px;
 `;
 
 export const InputNumber = styled(Input)`
-  display: flex;
   width: 100%;
   max-width: 150px;
+  margin-right: 20px;
 `;
 
 export const InputComplement = styled(Input)`
-  display: flex;
   width: 100%;
   max-width: 140px;
 `;
 
 export const InputCity = styled(Input)`
-  display: flex;
   width: 100%;
-  max-width: 140px;
+  max-width: 269px;
+  margin-right: 20px;
 `;
 export const InputState = styled(Input)`
-  display: flex;
   width: 100%;
-  max-width: 140px;
+  max-width: 269px;
+  margin-right: 20px;
 `;
 export const InputZipcode = styled(Input)`
-  display: flex;
   width: 100%;
-  max-width: 140px;
+  max-width: 269px;
 `;
