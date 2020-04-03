@@ -9,6 +9,7 @@ import ListDeliveryMan from '~/pages/DeliveryMan/List';
 import StoreDeliveryMan from '~/pages/DeliveryMan/Form';
 import ListRecipient from '~/pages/Recipient/List';
 import StoreRecipient from '~/pages/Recipient/Form';
+import ListProblems from '~/pages/Problems';
 import InvalidRoute from '~/pages/InvalidRoute';
 
 export default function Routes() {
@@ -34,6 +35,7 @@ export default function Routes() {
         component={StoreRecipient}
         isPrivate
       />
+      <Route path="/problems/list" component={ListProblems} isPrivate />
 
       <Route path="/" component={InvalidRoute} />
     </Switch>

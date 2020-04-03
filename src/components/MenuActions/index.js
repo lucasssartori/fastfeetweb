@@ -15,7 +15,7 @@ import {
   BtnAction,
 } from './styles';
 
-export default function MenuActions({ Show, Edit, Delete }) {
+export default function MenuActions({ Show, Edit, Delete, Cancel }) {
   const [visible, setVisible] = useState(false);
 
   function handleToggleVisible() {
@@ -35,6 +35,11 @@ export default function MenuActions({ Show, Edit, Delete }) {
   function handleDelete() {
     setVisible(!visible);
     Delete();
+  }
+
+  function handleCancel() {
+    setVisible(!visible);
+    Cancel();
   }
 
   return (
@@ -63,6 +68,12 @@ export default function MenuActions({ Show, Edit, Delete }) {
               <p>Excluir</p>
             </ActionMenu>
           )}
+          {Cancel && (
+            <ActionMenu onClick={handleCancel}>
+              <MdDeleteForever size={18} color="#DE3B3B" />
+              <p>Cancelar Encomenda</p>
+            </ActionMenu>
+          )}
         </ListActions>
       </ActionsMenu>
     </Container>
@@ -73,10 +84,12 @@ MenuActions.propTypes = {
   Show: PropTypes.func,
   Edit: PropTypes.func,
   Delete: PropTypes.func,
+  Cancel: PropTypes.func,
 };
 
 MenuActions.defaultProps = {
   Show: null,
   Edit: null,
   Delete: null,
+  Cancel: null,
 };
