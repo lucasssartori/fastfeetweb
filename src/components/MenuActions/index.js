@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   MdMoreHoriz,
@@ -17,6 +17,13 @@ import {
 
 export default function MenuActions({ Show, Edit, Delete, Cancel }) {
   const [visible, setVisible] = useState(false);
+  const [width, setWidth] = useState(150);
+
+  useEffect(() => {
+    if (Cancel) {
+      setWidth(200);
+    }
+  }, [Cancel]);
 
   function handleToggleVisible() {
     setVisible(!visible);
@@ -48,7 +55,7 @@ export default function MenuActions({ Show, Edit, Delete, Cancel }) {
         <MdMoreHoriz size={18} color="#999999" />
       </BtnAction>
 
-      <ActionsMenu visible={visible}>
+      <ActionsMenu visible={visible} width={width}>
         <ListActions>
           {Show && (
             <ActionMenu onClick={handleShow}>

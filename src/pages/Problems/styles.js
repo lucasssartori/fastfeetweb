@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { transparentize } from 'polished';
 
 export const Container = styled.div`
   max-width: 1200px;
@@ -36,13 +37,16 @@ export const TextTable = styled.p`
 
 export const Mensagem = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 15px 0;
+  padding: 25px;
+  border-radius: 5px;
+  background: #fff;
 
   h1 {
-    font-size: 24px;
-    line-height: 20px;
-    color: #666666;
+    margin-top: 20px;
+    font-size: 15px;
+    color: ${transparentize(0.3, '#7D40E7')};
   }
 `;
 
@@ -80,7 +84,7 @@ export const DivDelivery = styled.div`
 
 export const DivProblem = styled.div`
   width: auto;
-  max-width: 834px;
+  max-width: 900px;
   flex: 1;
 `;
 

@@ -12,13 +12,13 @@ export const BtnAction = styled.button`
 
 export const ActionsMenu = styled.div`
   position: absolute;
-  width: 150px;
-  left: calc(50% - 75px);
+  width: ${props => props.width}px;
+  left: calc(50% - ${props => props.width / 2}px);
   top: calc(100% + 5px);
   background: #fff;
   border-radius: 5px;
   border: 1px solid #eeeeee;
-  padding: 15px 5px;
+  padding: 15px 10px;
   display: ${props => (props.visible ? 'block' : 'none')};
   z-index: 1;
 
@@ -36,16 +36,16 @@ export const ActionsMenu = styled.div`
 `;
 
 export const ListActions = styled.div`
-  width: 150px;
+  width: 100%;
 `;
 
 export const ActionMenu = styled.button`
   background: none;
   border: 0;
-  width: 115px;
+  width: 100%;
 
-  padding: 0 10px 10px 10px;
-  margin: 0 10px 10px 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
   border-bottom: 1px solid #eeeeee;
 
   display: flex;
@@ -56,6 +56,10 @@ export const ActionMenu = styled.button`
     color: #999999;
     opacity: 1;
     font-weight: 500;
+  }
+
+  :first-child {
+    margin-top: 0;
   }
 
   :last-child {

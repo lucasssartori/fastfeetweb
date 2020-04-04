@@ -1,13 +1,13 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { FaTruck, FaSmog } from 'react-icons/fa';
 
 import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
-import history from '~/services/history';
 import Pagination from '~/components/Pagination';
 import Actions from '~/components/MenuActions';
+import ModalDetailsProblem from './DetailsProblem';
 
 import {
   Container,
@@ -28,6 +28,9 @@ export default function ListRecipient() {
   const [page = 1, setPage] = useState();
   const [loading = 0, setLoading] = useState();
 
+  const [modal, setModal] = useState(false);
+  const [problem, setProblem] = useState();
+
   const dispatch = useDispatch();
 
   const trataError = useCallback(
@@ -35,7 +38,7 @@ export default function ListRecipient() {
       if (error.response) {
         switch (error.response.status) {
           case 400:
-            toast.error(error.response.data.error);
+            toast.warn(error.response.data.error);
             break;
           case 401:
             toast.error(error.response.data.error);
@@ -61,16 +64,19 @@ export default function ListRecipient() {
           },
         });
 
-        response.data.deliverysProblems.forEach(delivery => {
-          setProblems(
-            delivery.DeliveryProblems.map(problem => {
-              return {
-                delivery: delivery.id,
-                descProblem: problem.description,
-              };
-            })
-          );
+        const list = response.data.deliverysProblems.map(delivery => {
+          const listProblems = delivery.DeliveryProblems.map(prob => {
+            return {
+              delivery: delivery.id,
+              problemId: prob.id,
+              descProblem: prob.description,
+            };
+          });
+          return listProblems;
         });
+
+        console.log(list);
+        setProblems(list);
 
         setLoading(0);
       } catch (error) {
@@ -86,6 +92,11 @@ export default function ListRecipient() {
     loadProblems();
   }, [loadProblems]);
 
+  function handleShow(item) {
+    setProblem(item);
+    setModal(true);
+  }
+
   return (
     <Container>
       <Content>
@@ -98,7 +109,15 @@ export default function ListRecipient() {
           </Mensagem>
         ) : problems.length <= 0 ? (
           <Mensagem>
-            <h1>Não foi encontrado nenhum problema</h1>
+            <div>
+              <FaSmog
+                size={80}
+                color="#999999"
+                style={{ paddingRight: '20px' }}
+              />
+              <FaTruck size={100} color="#7D40E7" />
+            </div>
+            <h1>Não foi encontrado nenhuma encomenda com problema</h1>
           </Mensagem>
         ) : (
           <Table>
@@ -114,7 +133,7 @@ export default function ListRecipient() {
               </DivActions>
             </Header>
             {problems.map(item => (
-              <TableRow key={item.delivery}>
+              <TableRow key={item.problemId}>
                 <DivDelivery>
                   <TextTable>#{item.delivery}</TextTable>
                 </DivDelivery>
@@ -122,7 +141,7 @@ export default function ListRecipient() {
                   <TextTable>{item.descProblem}</TextTable>
                 </DivProblem>
                 <DivActions>
-                  <Actions Show={() => history.push(``)} Cancel={() => {}} />
+                  <Actions Show={() => handleShow(item)} Cancel={() => {}} />
                 </DivActions>
               </TableRow>
             ))}
@@ -130,6 +149,9 @@ export default function ListRecipient() {
         )}
       </ContentTable>
       <Pagination page={page} setPage={setPage} list={problems} />
+      {modal && (
+        <ModalDetailsProblem problem={problem} close={() => setModal(false)} />
+      )}
     </Container>
   );
 }

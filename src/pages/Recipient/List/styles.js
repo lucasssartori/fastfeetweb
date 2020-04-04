@@ -69,10 +69,11 @@ export const TextTable = styled.p`
 export const Mensagem = styled.div`
   display: flex;
   align-items: center;
-  padding: 15px 0;
+  padding: 25px;
+  border-radius: 5px;
+  background: #fff;
   h1 {
-    font-size: 24px;
-    line-height: 20px;
+    font-size: 15px;
     color: #666666;
   }
 `;

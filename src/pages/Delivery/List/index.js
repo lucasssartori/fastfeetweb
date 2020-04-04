@@ -48,7 +48,7 @@ export default function ListDelivery() {
       if (error.response) {
         switch (error.response.status) {
           case 400:
-            toast.error(error.response.data.error);
+            toast.warn(error.response.data.error);
             break;
           case 401:
             toast.error(error.response.data.error);
