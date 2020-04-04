@@ -33,11 +33,11 @@ export default function DetailsDelivery({ delivery, close }) {
           <HeaderDiv>Datas</HeaderDiv>
           <TextModal>
             <span>Retirada: </span>
-            {delivery.start_date}
+            {delivery.startDate}
           </TextModal>
           <TextModal>
             <span>Entrega: </span>
-            {delivery.end_date}
+            {delivery.endDate}
           </TextModal>
         </DivDates>
         <DivSignature>

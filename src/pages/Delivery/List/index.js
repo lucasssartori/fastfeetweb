@@ -6,6 +6,9 @@ import { MdAdd, MdSearch } from 'react-icons/md';
 import { FaCircle } from 'react-icons/fa';
 import { confirmAlert } from 'react-confirm-alert';
 import { useDispatch } from 'react-redux';
+import { format, parseISO } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
+import pt from 'date-fns/locale/pt';
 
 import Input from '~/components/SimpleInput';
 import { signOut } from '~/store/modules/auth/actions';
@@ -37,6 +40,8 @@ import {
 } from './styles';
 
 export default function ListDelivery() {
+  const timeSP = 'America/Sao_Paulo';
+
   const [deliverys, setDeliverys] = useState([]);
   const [product = '', setProduct] = useState();
   const [page = 1, setPage] = useState();
@@ -94,7 +99,26 @@ export default function ListDelivery() {
             item = {
               ...item,
               status,
+              startDate: item.start_date
+                ? format(
+                    zonedTimeToUtc(parseISO(item.start_date), timeSP),
+                    "dd'/'MM'/'yyyy 'às' HH':'mm':'ss",
+                    {
+                      locale: pt,
+                    }
+                  )
+                : null,
+              endDate: item.end_date
+                ? format(
+                    zonedTimeToUtc(parseISO(item.end_date), timeSP),
+                    "dd'/'MM'/'yyyy 'às' HH':'mm':'ss",
+                    {
+                      locale: pt,
+                    }
+                  )
+                : null,
             };
+
             return item;
           })
         );
