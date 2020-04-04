@@ -28,8 +28,6 @@ export const ModalContent = styled.div`
 `;
 
 export const TextModal = styled.p`
-  white-space: nowrap;
-  overflow: hidden;
   margin-top: 20px;
   font-size: 16px;
   line-height: 26px;

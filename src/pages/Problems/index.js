@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { FaTruck, FaSmog } from 'react-icons/fa';
+import { confirmAlert } from 'react-confirm-alert';
 
 import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
@@ -64,19 +65,25 @@ export default function ListRecipient() {
           },
         });
 
-        const list = response.data.deliverysProblems.map(delivery => {
-          const listProblems = delivery.DeliveryProblems.map(prob => {
+        let listProblems = [];
+        response.data.deliverysProblems.forEach(delivery => {
+          const list = delivery.DeliveryProblems.map(prob => {
+            const strsize = prob.description.length;
             return {
-              delivery: delivery.id,
+              deliveryId: delivery.id,
               problemId: prob.id,
-              descProblem: prob.description,
+              descSmall: `${
+                strsize > 110
+                  ? `${prob.description.substring(0, 110)}...`
+                  : prob.description
+              }`,
+              descFull: prob.description,
             };
           });
-          return listProblems;
+          listProblems = listProblems.concat(list);
         });
 
-        console.log(list);
-        setProblems(list);
+        setProblems(listProblems);
 
         setLoading(0);
       } catch (error) {
@@ -95,6 +102,41 @@ export default function ListRecipient() {
   function handleShow(item) {
     setProblem(item);
     setModal(true);
+  }
+
+  async function handleDelete(deliveryDelete) {
+    try {
+      const response = await api.delete(
+        `deliveries/${deliveryDelete.deliveryId}`
+      );
+      if (response.status === 200) {
+        toast.success('Encomenda cancelada com sucesso!');
+        loadProblems();
+      } else {
+        toast.warn('Não foi possível apagar a encomenda!');
+      }
+    } catch (error) {
+      trataError(error);
+    }
+  }
+
+  function confirmCancel(deliveryDelete) {
+    confirmAlert({
+      title: 'Cancelamento',
+      message: 'Deseja cancelar a encomenda?',
+      buttons: [
+        {
+          label: 'Cancelar',
+          onClick: () => {
+            handleDelete(deliveryDelete);
+          },
+        },
+        {
+          label: 'Voltar',
+          onClick: () => toast.warn('Cancelamento não processado!!'),
+        },
+      ],
+    });
   }
 
   return (
@@ -135,13 +177,16 @@ export default function ListRecipient() {
             {problems.map(item => (
               <TableRow key={item.problemId}>
                 <DivDelivery>
-                  <TextTable>#{item.delivery}</TextTable>
+                  <TextTable>#{item.deliveryId}</TextTable>
                 </DivDelivery>
                 <DivProblem>
-                  <TextTable>{item.descProblem}</TextTable>
+                  <TextTable>{item.descSmall}</TextTable>
                 </DivProblem>
                 <DivActions>
-                  <Actions Show={() => handleShow(item)} Cancel={() => {}} />
+                  <Actions
+                    Show={() => handleShow(item)}
+                    Cancel={() => confirmCancel(item)}
+                  />
                 </DivActions>
               </TableRow>
             ))}
@@ -150,7 +195,10 @@ export default function ListRecipient() {
       </ContentTable>
       <Pagination page={page} setPage={setPage} list={problems} />
       {modal && (
-        <ModalDetailsProblem problem={problem} close={() => setModal(false)} />
+        <ModalDetailsProblem
+          problem={problem.descFull}
+          close={() => setModal(false)}
+        />
       )}
     </Container>
   );

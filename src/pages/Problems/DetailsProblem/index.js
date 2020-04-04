@@ -8,13 +8,13 @@ export default function DetailsProblem({ problem, close }) {
     <Modal onClick={close}>
       <ModalContent>
         <strong>VISUALIZAR PROBLEMA</strong>
-        <TextModal>{problem.descProblem}</TextModal>
+        <TextModal>{problem}</TextModal>
       </ModalContent>
     </Modal>
   );
 }
 
 DetailsProblem.propTypes = {
-  problem: PropTypes.object.isRequired,
+  problem: PropTypes.string.isRequired,
   close: PropTypes.func.isRequired,
 };
