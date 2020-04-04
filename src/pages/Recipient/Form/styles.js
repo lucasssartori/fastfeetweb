@@ -3,6 +3,7 @@ import { Form as Unform } from '@unform/web';
 
 import Button from '~/components/Button';
 import Input from '~/components/SimpleInput';
+import InputNumberFormat from '~/components/InputNumberFormat';
 
 export const Container = styled.div`
   width: 900px;
@@ -91,7 +92,8 @@ export const InputState = styled(Input)`
   max-width: 269px;
   margin-right: 20px;
 `;
-export const InputZipcode = styled(Input)`
+
+export const InputZipcode = styled(InputNumberFormat)`
   width: 100%;
   max-width: 269px;
 `;

@@ -195,7 +195,13 @@ export default function StoreDeliveryMan() {
           <div>
             <InputCity label="Cidade" name="city" placeholder="Diadema" />
             <InputState label="Estado" name="state" placeholder="São Paulo" />
-            <InputZipcode label="CEP" name="zipcode" placeholder="09960-580" />
+            <InputZipcode
+              label="CEP"
+              name="zipcode"
+              placeholder="09960-580"
+              format="#####-###"
+              mask="_"
+            />
           </div>
         </Form>
       </ContentForm>

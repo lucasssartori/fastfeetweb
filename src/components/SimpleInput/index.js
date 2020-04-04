@@ -4,8 +4,9 @@ import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
-export default function Input({ name, label, grow, ...rest }) {
+export default function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
+
   const { fieldName, defaultValue, registerField, error } = useField(name);
   useEffect(() => {
     registerField({
@@ -14,8 +15,9 @@ export default function Input({ name, label, grow, ...rest }) {
       path: 'value',
     });
   }, [fieldName, registerField]);
+
   return (
-    <Container grow={grow}>
+    <Container>
       {label && <label htmlFor={fieldName}>{label}</label>}
       <input
         id={fieldName}
@@ -31,10 +33,8 @@ export default function Input({ name, label, grow, ...rest }) {
 Input.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
-  grow: PropTypes.number,
 };
 
 Input.defaultProps = {
   label: null,
-  grow: null,
 };
