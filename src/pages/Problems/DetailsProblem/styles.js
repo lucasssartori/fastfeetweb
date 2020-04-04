@@ -25,11 +25,11 @@ export const ModalContent = styled.div`
     color: #444444;
     font-weight: bold;
   }
-`;
 
-export const TextModal = styled.p`
-  margin-top: 20px;
-  font-size: 16px;
-  line-height: 26px;
-  color: #666666;
+  p {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #666666;
+  }
 `;

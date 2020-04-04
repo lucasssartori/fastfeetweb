@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, ModalContent, TextModal } from './styles';
+import { Modal, ModalContent } from './styles';
 
 export default function DetailsProblem({ problem, close }) {
   return (
     <Modal onClick={close}>
       <ModalContent>
         <strong>VISUALIZAR PROBLEMA</strong>
-        <TextModal>{problem}</TextModal>
+        <p>{problem}</p>
       </ModalContent>
     </Modal>
   );

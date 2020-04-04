@@ -10,27 +10,31 @@ export default function InitialName({ name, size }) {
   const [initilName, setInitialName] = useState();
 
   useEffect(() => {
-    const names = name.split(' ');
+    if (name !== '') {
+      const names = name.split(' ');
 
-    if (names.length > 1) {
-      setInitialName(names[0].substring(0, 1) + names[1].substring(0, 1));
+      if (names.length > 1) {
+        setInitialName(names[0].substring(0, 1) + names[1].substring(0, 1));
+      } else {
+        setInitialName(names[0].substring(0, 2));
+      }
+
+      const red = Math.floor(Math.random() * 256);
+      const green = Math.floor(Math.random() * 256);
+      const blue = Math.floor(Math.random() * 256);
+      const colorStyle = `rgb(${red},${green},${blue})`;
+      const backgorundStyle = transparentize(0.9, colorStyle);
+
+      setColor(colorStyle);
+      setBackground(backgorundStyle);
     } else {
-      setInitialName(names[0].substring(0, 2));
+      setInitialName('NA');
     }
-
-    const red = Math.floor(Math.random() * 256);
-    const green = Math.floor(Math.random() * 256);
-    const blue = Math.floor(Math.random() * 256);
-    const colorStyle = `rgb(${red},${green},${blue})`;
-    const backgorundStyle = transparentize(0.9, colorStyle);
-
-    setColor(colorStyle);
-    setBackground(backgorundStyle);
   }, [name]);
 
   return (
-    <Container size={size} style={{ background }}>
-      <Name size={size} style={{ color }} className="initial">
+    <Container size={size} background={background} color={color}>
+      <Name size={size} color={color} className="initial">
         {initilName}
       </Name>
     </Container>

@@ -14,6 +14,7 @@ import history from '~/services/history';
 import Pagination from '~/components/Pagination';
 import InitialName from '~/components/InitialName';
 import Actions from '~/components/MenuActions';
+import ModalDetailsDelivery from './DetailsDelivery';
 
 import {
   Container,
@@ -40,6 +41,9 @@ export default function ListDelivery() {
   const [product = '', setProduct] = useState();
   const [page = 1, setPage] = useState();
   const [loading = 0, setLoading] = useState();
+
+  const [modal, setModal] = useState(false);
+  const [delivery, setDelivery] = useState();
 
   const dispatch = useDispatch();
 
@@ -76,22 +80,22 @@ export default function ListDelivery() {
         });
 
         setDeliverys(
-          response.data.deliverys.map(delivery => {
+          response.data.deliverys.map(item => {
             let status = '';
-            if (delivery.end_date !== null) {
+            if (item.end_date !== null) {
               status = 'ENTREGUE';
-            } else if (delivery.canceled_at !== null) {
+            } else if (item.canceled_at !== null) {
               status = 'CANCELADA';
-            } else if (delivery.start_date !== null) {
+            } else if (item.start_date !== null) {
               status = 'RETIRADA';
             } else {
               status = 'PENDENTE';
             }
-            delivery = {
-              ...delivery,
+            item = {
+              ...item,
               status,
             };
-            return delivery;
+            return item;
           })
         );
         setLoading(0);
@@ -151,6 +155,11 @@ export default function ListDelivery() {
       return edit;
     }
     return null;
+  }
+
+  function handleShow(item) {
+    setDelivery(item);
+    setModal(true);
   }
 
   return (
@@ -246,7 +255,7 @@ export default function ListDelivery() {
                 </DivStatus>
                 <DivActions>
                   <Actions
-                    Show={() => history.push('/delivery/store')}
+                    Show={() => handleShow(item)}
                     Edit={handleEdit(item)}
                     Delete={() => confirmDelete(item)}
                   />
@@ -257,6 +266,12 @@ export default function ListDelivery() {
         )}
       </ContentTable>
       <Pagination page={page} setPage={setPage} list={deliverys} />
+      {modal && (
+        <ModalDetailsDelivery
+          delivery={delivery}
+          close={() => setModal(false)}
+        />
+      )}
     </Container>
   );
 }
