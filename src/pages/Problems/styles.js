@@ -36,6 +36,8 @@ export const TextTable = styled.p`
 `;
 
 export const Mensagem = styled.div`
+  width: auto;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
