@@ -27,8 +27,7 @@ export default function StoreDeliveryMan() {
 
   const [titleForm, setTitle] = useState();
   const [deliveryman, setDeliveryman] = useState();
-  const [initialName, setInitialName] = useState();
-
+  const [iname, setIName] = useState();
   const formRef = useRef(null);
 
   const trataError = useCallback(
@@ -60,7 +59,7 @@ export default function StoreDeliveryMan() {
           const response = await api.get(`deliveryman/${id}`);
 
           setDeliveryman(response.data.deliveryMan);
-          setInitialName(response.data.deliveryMan.name);
+          setIName(response.data.deliveryMan.name);
         } else {
           setTitle('Cadastro de entregadores');
         }
@@ -156,13 +155,13 @@ export default function StoreDeliveryMan() {
           onSubmit={handleSubmitAdd}
         >
           <div>
-            <AvatarInput name="avatar" initialName={initialName} />
+            <AvatarInput name="avatar" iname={iname} />
           </div>
           <Input
             label="Nome"
             name="name"
             placeholder="Digite o nome completo"
-            onChange={e => setInitialName(e.target.value)}
+            onChange={e => setIName(e.target.value)}
           />
           <Input
             label="Email"

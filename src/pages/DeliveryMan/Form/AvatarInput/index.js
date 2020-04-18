@@ -8,7 +8,7 @@ import InitialName from '~/components/InitialName';
 
 import { Container, LabelAvatar, ImgAvatar } from './styles';
 
-export default function AvatarInput({ name, initialName, ...rest }) {
+export default function AvatarInput({ name, iname, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
@@ -57,9 +57,9 @@ export default function AvatarInput({ name, initialName, ...rest }) {
     <Container>
       <LabelAvatar>
         {preview ? (
-          <ImgAvatar src={preview} alt={initialName} />
+          <ImgAvatar src={preview} alt={iname} />
         ) : (
-          <InitialName name={initialName} size={150} />
+          <InitialName name={iname} size={150} />
         )}
         <input
           type="file"
@@ -76,10 +76,10 @@ export default function AvatarInput({ name, initialName, ...rest }) {
 }
 
 AvatarInput.propTypes = {
-  initialName: PropTypes.string,
+  iname: PropTypes.string,
   name: PropTypes.string.isRequired,
 };
 
 AvatarInput.defaultProps = {
-  initialName: 'NA',
+  iname: null,
 };
