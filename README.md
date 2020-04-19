@@ -34,9 +34,9 @@
       width="150px" />
 </p>
 
-Neste projeto foi desenvolvido o backend do FastFeet, que é uma aplicação de gerenciamento de entregas.
+Neste projeto foi desenvolvido o frontend do FastFeet. O FastFeet é uma aplicação completa de gerenciamento de entregas.
 
-Este backend será consumido através das aplicações Web e Mobile do FastFeet.
+Este frontend irá consumir o backend do FastFeet construido em NodeJS.
 
 ## 2 - Tecnologias
 
