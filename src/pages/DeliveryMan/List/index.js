@@ -133,7 +133,10 @@ export default function ListDeliveryMan() {
             <span>
               <MdSearch size={22} color="#999999" />
             </span>
-            <Input name="nameSearch" placeholder="Buscar por entregadores" />
+            <Input
+              name="nameSearch"
+              placeholder="Digite o entregador e tecle enter"
+            />
           </Form>
           <AddButton
             title="CADASTRAR"
@@ -165,7 +168,7 @@ export default function ListDeliveryMan() {
                 <strong>Foto</strong>
               </DivAvatar>
               <DivName>
-                <strong>Nomne</strong>
+                <strong>Nome</strong>
               </DivName>
               <DivEmail>
                 <strong>Email</strong>

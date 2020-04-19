@@ -195,7 +195,10 @@ export default function ListDelivery() {
             <span>
               <MdSearch size={22} color="#999999" />
             </span>
-            <Input name="productSearch" placeholder="Buscar por encomendas" />
+            <Input
+              name="productSearch"
+              placeholder="Digite o produto e tecle enter"
+            />
           </Form>
           <AddButton
             title="CADASTRAR"

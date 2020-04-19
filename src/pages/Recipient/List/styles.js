@@ -13,7 +13,7 @@ export const Content = styled.div`
 
   form {
     input {
-      width: 237px;
+      width: 300px;
       height: 36px;
       background: #ffffff;
       border: 1px solid #dddddd;

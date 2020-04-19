@@ -142,7 +142,10 @@ export default function ListRecipient() {
             <span>
               <MdSearch size={22} color="#999999" />
             </span>
-            <Input name="nameSearch" placeholder="Buscar por destinatários" />
+            <Input
+              name="nameSearch"
+              placeholder="Digite o destinatário e tecle enter"
+            />
           </Form>
           <AddButton
             title="CADASTRAR"
